@@ -1,11 +1,12 @@
 
 
+
 {
   "builds": [
     {
       "use": "@vercel/static",
       "config": {
-        "includeFiles": ["public/**"]
+        "includeFiles": ["public/*", "public/**/*"]
       }
     }
   ],
