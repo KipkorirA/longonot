@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mt. Longonot Adventure | One-Day Hiking Itinerary</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --earth-dark: #2a1810;
+      --earth-brown: #8b5a3c;
+      --earth-tan: #d4a574;
+      --volcanic-red: #d64933;
+      --sky-blue: #4a90a4;
+      --grass-green: #5a7b4f;
+      --sand-light: #f5ebe0;
+      --shadow: rgba(42, 24, 16, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, var(--sand-light) 0%, #e8d5c4 100%);
+      color: var(--earth-dark);
+      overflow-x: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: 
+        linear-gradient(to bottom, rgba(42, 24, 16, 0.7) 0%, rgba(139, 90, 60, 0.85) 100%),
+        url('public/Mount-Longonot.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(214, 73, 51, 0.15) 0%, transparent 70%);
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-30px, -30px) rotate(5deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 1200px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 12vw, 8rem);
+      line-height: 0.9;
+      color: white;
+      margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 2px 2px 4px rgba(214, 73, 51, 0.3);
+      animation: titleSlide 1s ease-out 0.2s both;
+    }
+
+    @keyframes titleSlide {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--sand-light);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .stat-item {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--volcanic-red);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--earth-brown);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.5rem;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section {
+      margin-bottom: 5rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--earth-dark);
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--volcanic-red) 0%, transparent 100%);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--volcanic-red), var(--sky-blue));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(10px);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -3rem;
+      top: 0.5rem;
+      width: 20px;
+      height: 20px;
+      background: var(--volcanic-red);
+      border-radius: 50%;
+      border: 4px solid var(--sand-light);
+      box-shadow: 0 0 0 4px var(--shadow);
+    }
+
+    .timeline-time {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--volcanic-red);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px var(--shadow);
+      border-left: 4px solid var(--earth-tan);
+    }
+
+    .timeline-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--earth-dark);
+    }
+
+    .timeline-content p, .timeline-content ul {
+      color: var(--earth-brown);
+      line-height: 1.6;
+    }
+
+    .timeline-content ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .timeline-content li::before {
+      content: '▸';
+      color: var(--volcanic-red);
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-top: 4px solid var(--volcanic-red);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px var(--shadow);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--earth-dark);
+      margin-bottom: 1rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card li {
+      padding: 0.5rem 0;
+      color: var(--earth-brown);
+      border-bottom: 1px solid rgba(139, 90, 60, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card li::before {
+      content: '✓';
+      color: var(--grass-green);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .hike-stats-table {
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px var(--shadow);
+      margin-top: 2rem;
+    }
+
+    .hike-stats-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hike-stats-table th {
+      background: linear-gradient(135deg, var(--volcanic-red) 0%, var(--earth-brown) 100%);
+      color: white;
+      padding: 1.5rem;
+      text-align: left;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hike-stats-table td {
+      padding: 1.5rem;
+      color: var(--earth-brown);
+      border-bottom: 1px solid rgba(139, 90, 60, 0.1);
+    }
+
+    .hike-stats-table tr:hover {
+      background: rgba(214, 73, 51, 0.05);
+    }
+
+    .hike-stats-table td:first-child {
+      font-weight: 600;
+      color: var(--earth-dark);
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, var(--volcanic-red) 0%, var(--earth-brown) 100%);
+      padding: 4rem 2rem;
+      border-radius: 24px;
+      text-align: center;
+      color: white;
+      margin: 4rem 0;
+      box-shadow: 0 12px 40px var(--shadow);
+    }
+
+    .cta-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .meeting-point {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--earth-brown);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      .timeline {
+        padding-left: 2rem;
+      }
+
+      .timeline-item {
+        padding-left: 1rem;
+      }
+
+      .timeline-item::before {
+        left: -2.2rem;
+        width: 16px;
+        height: 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    .scroll-indicator::after {
+      content: '↓';
+      font-size: 2rem;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function App() {
+      const [isVisible, setIsVisible] = useState(false);
+
+      useEffect(() => {
+        setIsVisible(true);
+      }, []);
+
+      return (
+        <div className="app">
+          {/* Hero Section */}
+          <section className="hero">
+            <div className="hero-content">
+              <h1 className="hero-title">MT. LONGONOT</h1>
+              <p className="hero-subtitle">One-Day Adventure Itinerary</p>
+              
+              <div className="hero-stats">
+                <div className="stat-item">
+                  <span className="stat-number">~13km</span>
+                  <span className="stat-label">Total Distance</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">~600m</span>
+                  <span className="stat-label">Elevation Gain</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">4-6hrs</span>
+                  <span className="stat-label">Hike Duration</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">2,780m</span>
+                  <span className="stat-label">Peak Elevation</span>
+                </div>
+              </div>
+            </div>
+            <div className="scroll-indicator"></div>
+          </section>
+
+          {/* Timeline Section */}
+          <div className="container">
+            <section className="section">
+              <h2 className="section-title">🗓 Daily Timeline</h2>
+              
+              <div className="timeline">
+                <div className="timeline-item">
+                  <div className="timeline-time">6:00 AM</div>
+                  <div className="timeline-content">
+                    <h3>Morning Departure</h3>
+                    <p>Depart from Nairobi (68-90 km, ~1.5-2 hours)</p>
+                    <p><strong>Meeting Point:</strong> KenCom, Nairobi CBD</p>
+                  </div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-time">8:00 AM</div>
+                  <div className="timeline-content">
+                    <h3>Arrival & Preparation</h3>
+                    <p>Arrive at Mt. Longonot National Park gate, pay entry fees, and warm up for the hike ahead.</p>
+                  </div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-time">8:30 AM</div>
+                  <div className="timeline-content">
+                    <h3>Hike Begins</h3>
+                    <ul>
+                      <li><strong>Gate to crater rim:</strong> ~3.1 km, steep climb (1.5-2 hours)</li>
+                      <li><strong>Optional crater rim circuit:</strong> ~7.2 km around rim (adds 2-3 hours)</li>
+                      <li><strong>Difficulty:</strong> Moderate to challenging</li>
+                    </ul>
+                    <p style={{marginTop: '1rem'}}>Enjoy panoramic views of the Rift Valley and crater floor!</p>
+                  </div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-time">1:00 PM - 2:00 PM</div>
+                  <div className="timeline-content">
+                    <h3>Lunch & Rest</h3>
+                    <p>Snack or lunch at crater rim or base. Relax, take photos, and soak in the stunning scenery.</p>
+                  </div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-time">2:30 PM - 3:30 PM</div>
+                  <div className="timeline-content">
+                    <h3>Descent</h3>
+                    <p>Carefully make your way back down to the park gate.</p>
+                  </div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-time">4:00 PM</div>
+                  <div className="timeline-content">
+                    <h3>Departure</h3>
+                    <p>Depart Mt. Longonot for Nairobi.</p>
+                  </div>
+                </div>
+
+                <div className="timeline-item">
+                  <div className="timeline-time">6:00 PM</div>
+                  <div className="timeline-content">
+                    <h3>Return to Nairobi</h3>
+                    <p>Arrive back in Nairobi, full of memories and tired legs!</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* What to Carry & Wear */}
+            <section className="section">
+              <h2 className="section-title">Essential Gear</h2>
+              
+              <div className="grid">
+                <div className="card">
+                  <span className="card-icon">🎒</span>
+                  <h3>What to Carry</h3>
+                  <ul>
+                    <li>At least 2 liters of water per person</li>
+                    <li>Energy snacks (nuts, fruit, granola bars)</li>
+                    <li>Packed lunch</li>
+                    <li>Sunscreen, sunglasses, hat</li>
+                    <li>Small backpack</li>
+                    <li>Walking stick (optional but helpful)</li>
+                    <li>Camera or phone for photos</li>
+                  </ul>
+                </div>
+
+                <div className="card">
+                  <span className="card-icon">👟</span>
+                  <h3>What to Wear</h3>
+                  <ul>
+                    <li>Comfortable hiking shoes/boots with good grip</li>
+                    <li>Light, breathable clothing (layers recommended)</li>
+                    <li>Jacket or sweater (mornings can be chilly)</li>
+                    <li>Cap/hat for sun protection</li>
+                    <li>Rain jacket (weather can change quickly)</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            {/* Hike Stats Table */}
+            <section className="section">
+              <h2 className="section-title">📊 Detailed Hike Statistics</h2>
+              
+              <div className="hike-stats-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Segment</th>
+                      <th>Distance</th>
+                      <th>Time (avg)</th>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Gate → Crater Rim</td>
+                      <td>~3.1 km</td>
+                      <td>1.5-2 hrs</td>
+                      <td>Steep, dusty trail</td>
+                    </tr>
+                    <tr>
+                      <td>Crater Rim Circuit (optional)</td>
+                      <td>~7.2 km</td>
+                      <td>2-3 hrs</td>
+                      <td>Scenic, moderate ups/downs</td>
+                    </tr>
+                    <tr>
+                      <td>Total (with rim circuit)</td>
+                      <td>~13 km</td>
+                      <td>4-6 hrs</td>
+                      <td>Challenging but rewarding</td>
+                    </tr>
+                    <tr>
+                      <td>Elevation Gain</td>
+                      <td>~600 m</td>
+                      <td>—</td>
+                      <td>From ~2,150 m to ~2,780 m</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="cta-section">
+              <h2>Ready for the Adventure?</h2>
+              <p>Join us for an unforgettable journey to one of Kenya's most spectacular volcanic landscapes!</p>
+              <div className="meeting-point">
+                📍 Meeting Point: KenCom, Nairobi CBD at 6:00 AM
+              </div>
+            </section>
+          </div>
+
+          {/* Footer */}
+          <footer className="footer">
+            <p>Mt. Longonot Adventure • Experience the Great Rift Valley</p>
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
