@@ -406,26 +406,190 @@
     }
 
     @media (max-width: 768px) {
-      .hero-stats {
-        gap: 1.5rem;
+      /* Hero section mobile adjustments */
+      .hero {
+        padding: 1rem;
+        min-height: 85vh;
       }
 
+      .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-stats {
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .stat-item {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+      }
+
+      .stat-number {
+        font-size: 1.8rem;
+      }
+
+      .stat-label {
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+
+      /* Container and sections */
+      .container {
+        padding: 2rem 1rem;
+      }
+
+      .section {
+        margin-bottom: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .section-title::after {
+        bottom: -5px;
+        height: 4px;
+      }
+
+      /* Timeline mobile adjustments */
       .timeline {
-        padding-left: 2rem;
+        padding-left: 1.5rem;
       }
 
       .timeline-item {
-        padding-left: 1rem;
+        padding-left: 0.75rem;
+        margin-bottom: 1.25rem;
       }
 
       .timeline-item::before {
-        left: -2.2rem;
-        width: 16px;
-        height: 16px;
+        left: -1.75rem;
+        width: 14px;
+        height: 14px;
+        border: 3px solid var(--sand-light);
+        box-shadow: 0 0 0 3px var(--shadow);
       }
 
+      .timeline::before {
+        width: 3px;
+      }
+
+      .timeline-time {
+        font-size: 1.1rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .timeline-content {
+        padding: 0.85rem;
+        border-radius: 8px;
+        border-left-width: 3px;
+      }
+
+      .timeline-content h3 {
+        font-size: 1rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .timeline-content p,
+      .timeline-content ul {
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+
+      .timeline-content ul {
+        padding-left: 0.75rem;
+      }
+
+      .timeline-content li {
+        margin-bottom: 0.35rem;
+      }
+
+      /* Cards grid */
       .grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .card {
+        padding: 1rem;
+      }
+
+      .card-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .card ul {
+        padding-left: 1rem;
+      }
+
+      .card li {
+        font-size: 0.85rem;
+        margin-bottom: 0.35rem;
+        padding-left: 0.35rem;
+      }
+
+      /* Table mobile adjustments */
+      .hike-stats-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .hike-stats-table table {
+        font-size: 0.8rem;
+      }
+
+      .hike-stats-table th,
+      .hike-stats-table td {
+        padding: 0.6rem 0.4rem;
+      }
+
+      .hike-stats-table th {
+        font-size: 0.75rem;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .cta-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .cta-section p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .meeting-point {
+        padding: 0.85rem;
+        font-size: 0.9rem;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 1.25rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      /* Scroll indicator */
+      .scroll-indicator {
+        bottom: 1rem;
+      }
+
+      .scroll-indicator::after {
+        font-size: 1.5rem;
       }
     }
 
